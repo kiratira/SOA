@@ -4,6 +4,7 @@ const express = require('express'),
 
 
 router.get('/', controller.index);
+router.get('/user',controller.getAll);
 
 module.exports = router;
 
