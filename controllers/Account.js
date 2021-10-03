@@ -21,5 +21,13 @@ module.exports = {
         m_user.deleteOne({_id: req.params.id})
             .then(() => res.status(200).json({message: 'Utilisateur supprime !'}))
             .catch(error => res.status(400).json({ error }))
+    },
+
+    modify: function(req, res, next) {
+        m_user.updateOne(
+            {_id: req.params.id},
+            { $set: { name : req.body.name } }
+        ).then(() => res.status(200).json({message: 'Utilisateur modifie !'}))
+        .catch(error => res.status(400).json({ error }))
     }
 };
