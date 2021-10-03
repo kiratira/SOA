@@ -7,8 +7,14 @@ module.exports = {
 
     getAll: function (req,res,next){
         m_user.find()
-            .then(projects => res.status(200).json(projects))
+            .then(users => res.status(200).json(users))
             .catch(error => res.status(400).json({ error }));
+    },
+
+    getOne: function(req, res, next){
+        m_user.findById({_id: req.params.id})
+            .then(user => res.status(200).json(user))
+            .catch(error => res.status(400).json({error}))
     },
 
     delete: function(req, res, next) {

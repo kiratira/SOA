@@ -5,6 +5,7 @@ const express = require('express'),
 
 router.get('/', controller.index);
 router.get('/user',controller.getAll);
+router.get('/user/:id', controller.getOne);
 router.delete('/delete/:id', controller.delete);
 
 module.exports = router;
