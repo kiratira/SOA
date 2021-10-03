@@ -15,6 +15,7 @@ const r_QR = require("../routes/QRcode");
 const r_Store = require("../routes/Store");
 
 
+
 module.exports = function ( app ) {
     app.use(bodyParser.urlencoded ({'extended': true }));
     app.use(bodyParser.json());
