@@ -14,6 +14,6 @@ module.exports = {
     delete: function(req, res, next) {
         m_user.deleteOne({_id: req.params.id})
             .then(() => res.status(200).json({message: 'Utilisateur supprime !'}))
-            .catch(error = res.status(400).json(error))
+            .catch(error => res.status(400).json({ error }))
     }
 };
