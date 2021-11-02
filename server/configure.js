@@ -24,7 +24,7 @@ module.exports = function ( app ) {
 
     app.use('/Account',r_Account)
         .use('/Admin',r_Admin)
-        .use('/login',r_Auth)
+        .use('/Auth',r_Auth)
         .use('/Map',r_Map)
         .use('/QR',r_QR)
         .use('/Store',r_Store);
