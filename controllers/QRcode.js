@@ -1,5 +1,11 @@
 module.exports = {
-    index: function (req, res){
-        res.send('QR:index controller');
+    pierre: function (req, res){
+        res.send('QR:pierre controller');
+    },
+    bronze: function (req, res){
+        res.send('QR:bronze controller');
+    },
+    fer: function (req, res){
+        res.send('QR:fer controller');
     }
 };

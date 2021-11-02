@@ -7,6 +7,8 @@ const UserSchema = mongoose.Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true, unique:false},
     token: {type: String},
+    role: {type:String,default:'client',enum: ["client","artisant","admin"]}
+    
 })
 
 UserSchema.plugin(uniqueValidator);

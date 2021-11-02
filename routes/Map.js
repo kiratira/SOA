@@ -1,14 +1,16 @@
 const express = require('express'),
     router = express.Router(),
+    auth = require("../middleware/auth"),
     controller = require('../controllers/Map');
-    auth = require("../middleware/auth");
+const {authRole, ROLE} = require("../server/AuthNRole");
 
 
-router.get('/', controller.index);
-router.get('/interestPoints',auth,controller.getAll);
-router.get('/interestPoint/:id', controller.getOne);
-router.delete('/delete/:id', controller.delete);
-router.put('/update/:id', controller.update);
-router.post('/new',controller.newInterestPoint);
+
+//router.get('/', controller.index);
+router.get('/',auth,authRole(ROLE.CLIENT),controller.getAll);
+router.get(':id',authRole(ROLE.CLIENT), controller.getOne);
+router.delete('/delete/:id',authRole(ROLE.CLIENT), controller.delete);
+router.put('/update/:id',authRole(ROLE.ARTISANT), controller.update);
+router.post('/new',authRole(ROLE.ADMIN),controller.newInterestPoint);
 
 module.exports = router;
