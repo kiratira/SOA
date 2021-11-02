@@ -69,7 +69,7 @@ module.exports = {
                 );
                 user.token = token;
 
-            res.status(200).json(user);
+                res.status(200).json(user);
             }
             res.status(400).send("email ou mot de passe invalide(s)");
             
