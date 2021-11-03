@@ -42,6 +42,8 @@ module.exports = {
             
             user.token = token;
 
+            await user.save();
+
             res.status(201).json(user);
         }
         catch(err){
