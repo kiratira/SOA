@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
 const UserSchema = mongoose.Schema({
@@ -7,6 +7,7 @@ const UserSchema = mongoose.Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true, unique:false},
     token: {type: String},
+    tokenExpiration: {bsonType: Date},
     role: {type:String,default:'client',enum: ["client","artisant","admin"]}
     
 })

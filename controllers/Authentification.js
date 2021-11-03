@@ -2,6 +2,9 @@ require("dotenv").config();
 const m_user = require('../models/User');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const {now} = require("mongoose");
+
+const ValidateTime = 3;
 
 module.exports = {
     index: function (req, res){
@@ -39,8 +42,12 @@ module.exports = {
                     expiresIn:"2h",
                 }
             );
-            
+
             user.token = token;
+            let expiration = new Date();
+            expiration.setTime(Date.now())
+            expiration.setHours(expiration.getHours()+ValidateTime)
+            user.tokenExpiration = expiration;
 
             await user.save();
 
@@ -70,8 +77,13 @@ module.exports = {
                     }
                 );
                 user.token = token;
-
-                res.status(200).json(user);
+                let expiration = new Date();
+                expiration.setTime(Date.now())
+                expiration.setHours(expiration.getHours()+ValidateTime)
+                user.tokenExpiration = expiration;
+                await m_user.updateOne({_id:user._id},{token: token,tokenExpiration: expiration})
+                    .then(()=>res.status(200).json(user))
+                    .catch(error => res.status(400).json({error}));
             }
             res.status(400).send("email ou mot de passe invalide(s)");
             
