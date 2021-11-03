@@ -7,9 +7,11 @@ const UserSchema = mongoose.Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true, unique:false},
     token: {type: String},
-    tokenExpiration: {bsonType: Date},
-    role: {type:String,default:'client',enum: ["client","artisant","admin"]}
-    
+    tokenExpiration: {Type: Date},
+    role: {type:String,default:'client',enum: ["client","artisant","admin"]},
+    tickets: [{
+        Expire: {type : Date}
+    }]
 })
 
 UserSchema.plugin(uniqueValidator);

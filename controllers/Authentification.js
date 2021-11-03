@@ -44,6 +44,7 @@ module.exports = {
             );
 
             user.token = token;
+
             let expiration = new Date();
             expiration.setTime(Date.now())
             expiration.setHours(expiration.getHours()+ValidateTime)

@@ -1,4 +1,5 @@
 const m_product = require('../models/product')
+const m_user = require('../models/User')
 
 module.exports = {
     index: function (req, res){
@@ -36,5 +37,12 @@ module.exports = {
         product.save()
             .then(() => res.status(201).json({message: 'Produit enregistré !'}))
             .catch(onerror => res.status(400).json({onerror}));
+    },
+    getTicket: function (req,res, next){
+        const validDate = new Date(req.body.ValideDate);
+        const ticket = {Expire:validDate};
+        m_user.updateOne( {_id: req.user.user_id},{$push: {tickets: ticket}})
+            .then(() => res.status(201).json({message: 'Ticket enregistré !'}))
+            .catch(error => res.status(400).json({error}))
     }
 };
