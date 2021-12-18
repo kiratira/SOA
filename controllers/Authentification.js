@@ -54,26 +54,26 @@ module.exports = {
     loginUser: async(req, res) => {
         try {
             const { email, password } = req.body;
-
             if(!(email && password)){
                 res.status(400).send("Informations manquantes");
             }
 
             const user = await m_user.findOne({ email });
-
             if(user && (await bcrypt.compare(password, user.password))){
-                const token = jwt.sign(
+                const newtoken = jwt.sign(
                     {user_id: user._id, email},
                     process.env.TOKEN_KEY,
                     {
                         expiresIn: "2h",
                     }
                 );
-                user.token = token;
-
-                res.status(200).json(user);
+                
+                return await m_user.findOneAndUpdate({email}, {token: newtoken})
+                    .then(() => m_user.findById({_id: user._id}))
+                        .then(user => res.status(200).json(user))    
+                        .catch(error => res.status(400).json({error}))
             }
-            res.status(400).send("email ou mot de passe invalide(s)");
+            return await res.status(400).send("email ou mot de passe invalide(s)");
             
         }catch(err){
             console.log(err);

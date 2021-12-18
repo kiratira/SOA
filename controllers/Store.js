@@ -2,7 +2,7 @@ const m_product = require('../models/product')
 
 module.exports = {
     index: function (req, res){
-        res.send('Store:index controller');
+        return res.send('Store:index controller');
     },
 
     getAll: function (req,res,next){

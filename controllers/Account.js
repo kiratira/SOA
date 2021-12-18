@@ -12,7 +12,7 @@ module.exports = {
     },
 
     getOne: function(req, res, next){
-        m_user.findById({_id: req.params.id})
+        m_user.findById({_id: req.params.id}, '-_id __v')
             .then(user => res.status(200).json(user))
             .catch(error => res.status(400).json({error}))
     },

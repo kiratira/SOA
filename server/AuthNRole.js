@@ -1,3 +1,4 @@
+const m_user = require('../models/User');
 
 const ROLE = {
     ADMIN: 'admin',
@@ -6,39 +7,38 @@ const ROLE = {
 }
 
 function authRole(role){
-    return(req,res,next) => {
+    return async (req,res,next) => {
+        const token = req.headers["x-access-token"];
+        const user = await m_user.findOne({ token }, {'_id':0, '__v':0});
+        if(!user){
+            return res.status(400).send('User not found');
+        }
+        
         switch(role){
             case "admin":
-                if (req.body.role !== role)
+                if (user.role !== role)
                 {
-                    res.status(401)
-                    return res.send('Not Allowed')
+                    return res.status(401).send('Not Allowed')
                 }
-                next();
-                break;
+                return next();
             case "artisant":
-                if (req.body.role !== role || req.body.role === "admin")
+                if (user.role !== role || user.role === "admin")
                 {
-                    res.status(401)
-                    return res.send('Not Allowed')
+                    return res.status(401).send('Not Allowed')
                 }
-                next();
-                break;
+                return next();
             case "client":
-                if (req.body.role !== role || req.body.role === "admin" || req.body.role === "artisant")
+                if (user.role !== role || user.role === "admin" || user.role === "artisant")
                 {
-                    res.status(401)
-                    return res.send('Not Allowed')
+                    return res.status(401).send('Not Allowed')
                 }
-                next();
-                break;
+                return next();
         }
         if (req.body.role !== role)
         {
-            res.status(401)
-            return res.send('Not Allowed')
+            return res.status(401).send('Not Allowed')
         }
-        next();
+        return next();
     }
 }
 module.exports = { authRole,ROLE: ROLE }
