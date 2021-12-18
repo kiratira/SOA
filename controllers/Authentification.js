@@ -2,6 +2,9 @@ require("dotenv").config();
 const m_user = require('../models/User');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const {now} = require("mongoose");
+
+const ValidateTime = 3;
 
 module.exports = {
     index: function (req, res){
@@ -39,8 +42,13 @@ module.exports = {
                     expiresIn:"2h",
                 }
             );
-            
+
             user.token = token;
+
+            let expiration = new Date();
+            expiration.setTime(Date.now())
+            expiration.setHours(expiration.getHours()+ValidateTime)
+            user.tokenExpiration = expiration;
 
             await user.save();
 
@@ -60,7 +68,7 @@ module.exports = {
 
             const user = await m_user.findOne({ email });
             if(user && (await bcrypt.compare(password, user.password))){
-                const newtoken = jwt.sign(
+                const token = jwt.sign(
                     {user_id: user._id, email},
                     process.env.TOKEN_KEY,
                     {
@@ -68,10 +76,15 @@ module.exports = {
                     }
                 );
                 
-                return await m_user.findOneAndUpdate({email}, {token: newtoken})
-                    .then(() => m_user.findById({_id: user._id}))
-                        .then(user => res.status(200).json(user))    
-                        .catch(error => res.status(400).json({error}))
+                user.token = token;
+                let expiration = new Date();
+                expiration.setTime(Date.now())
+                expiration.setHours(expiration.getHours()+ValidateTime)
+                user.tokenExpiration = expiration;
+                
+                return await m_user.updateOne({_id:user._id},{token: token,tokenExpiration: expiration})
+                    .then(()=>res.status(200).json(user))
+                    .catch(error => res.status(400).json({error}));
             }
             return await res.status(400).send("email ou mot de passe invalide(s)");
             

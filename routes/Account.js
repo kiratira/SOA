@@ -2,7 +2,7 @@ const express = require('express'),
     router = express.Router(),
     controller = require('../controllers/Account'),
     auth = require("../middleware/auth");
-const {authRole, ROLE} = require("../server/AuthNRole");
+const {authRole, ROLE} = require("../middleware/AuthNRole");
 
 
 router.get('/',auth, authRole(ROLE.CLIENT), controller.index);

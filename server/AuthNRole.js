@@ -32,13 +32,13 @@ function authRole(role){
                 {
                     return res.status(401).send('Not Allowed')
                 }
-                return next();
+                next();
         }
         if (req.body.role !== role)
         {
             return res.status(401).send('Not Allowed')
         }
-        return next();
+        next();
     }
 }
 module.exports = { authRole,ROLE: ROLE }

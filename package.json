@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "mongoose": "^6.0.8",
-    "mongoose-unique-validator": "^2.0.4"
+    "mongoose-unique-validator": "^3.0.0"
   },
   "devDependencies": {
     "bcryptjs": "^2.4.3",

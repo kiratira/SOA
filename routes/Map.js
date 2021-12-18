@@ -2,7 +2,7 @@ const express = require('express'),
     router = express.Router(),
     auth = require("../middleware/auth"),
     controller = require('../controllers/Map');
-const {authRole, ROLE} = require("../server/AuthNRole");
+const {authRole, ROLE} = require("../middleware/AuthNRole");
 
 
 
