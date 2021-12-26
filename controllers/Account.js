@@ -26,7 +26,7 @@ module.exports = {
     
 
     delete: async function(req, res, next) {
-        await m_user.deleteOne({email: req.params.id})
+        await m_user.deleteOne({email: req.params.email})
             .then(() => res.status(200).json({message: 'Utilisateur supprime !'}))
             .catch(error => res.status(400).json({ error }))
     },
