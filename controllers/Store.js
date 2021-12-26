@@ -18,8 +18,14 @@ module.exports = {
             .catch(error => res.status(400).json({error}))
     },
 
+    getOneByName: function(req, res, next){
+        m_product.findOne({name: req.params.name})
+            .then(product => res.status(200).json(product))
+            .catch(error => res.status(400).json({error}))
+    },
+
     delete: function(req, res, next) {
-        m_product.deleteOne({_id: req.params.id})
+        m_product.deleteOne({name: req.params.name})
             .then(() => res.status(200).json({message: 'Produit supprime !'}))
             .catch(error => res.status(400).json({ error }))
     },

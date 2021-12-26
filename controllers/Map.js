@@ -17,8 +17,14 @@ module.exports = {
             .catch(error => res.status(400).json({error}))
     },
 
+    getOneByName: function(req, res, next){
+        m_InterestPoints.findOne({name: req.params.name})
+            .then(interestPoints => res.status(200).json(interestPoints))
+            .catch(error => res.status(400).json({error}))
+    },
+
     delete: function(req, res, next) {
-        m_InterestPoints.deleteOne({_id: req.params.id})
+        m_InterestPoints.deleteOne({name: req.params.name})
             .then(() => res.status(200).json({message: 'Point d interet supprime !'}))
             .catch(error => res.status(400).json({ error }))
     },

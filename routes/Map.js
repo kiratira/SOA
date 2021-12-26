@@ -7,9 +7,10 @@ const {authRole, ROLE} = require("../middleware/AuthNRole");
 
 
 //router.get('/', controller.index);
-router.get('/',auth, authRole(ROLE.CLIENT),controller.getAll);
-router.get(':id',auth, authRole(ROLE.CLIENT), controller.getOne);
-router.delete('/delete/:id',auth, authRole(ROLE.CLIENT), controller.delete);
+router.get('/points',auth, authRole(ROLE.CLIENT),controller.getAll);
+router.get('/pointId/:id',auth, authRole(ROLE.CLIENT), controller.getOne);
+router.get('/point/:name',auth, authRole(ROLE.CLIENT), controller.getOneByName);
+router.delete('/delete/:name',auth, authRole(ROLE.ADMIN), controller.delete);
 router.put('/update/:id',auth, authRole(ROLE.ARTISANT), controller.update);
 router.post('/new',auth, authRole(ROLE.ADMIN),controller.newInterestPoint);
 
