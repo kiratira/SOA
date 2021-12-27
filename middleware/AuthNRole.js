@@ -17,26 +17,23 @@ function authRole(role){
                     const userRole = user.role;
                     switch (role) {
                         case "admin":
-                            if (userRole !== role) {
-                                return res.status(401).send('Not Allowed')
+                            if (userRole === role) {
+								next();
                             }
-                            next();
+							return res.status(401).send('Not Allowed')
                             break;
                         case "artisant":
-                            if (userRole !== role || userRole === "admin") {
-                                return res.status(401).send('Not Allowed')
+                            if (userRole === role || userRole === "admin") {
+                            	next();
                             }
-                            next();
+							return res.status(401).send('Not Allowed')
                             break;
                         case "client":
-                            if (userRole !== role || userRole === "admin" || userRole === "artisant") {
-                                return res.status(401).send('Not Allowed')
+                            if (userRole === role || userRole === "admin" || userRole === "artisant") {
+                            	next();
                             }
-                            next();
+							return res.status(401).send('Not Allowed')
                             break;
-                    }
-                    if (userRole !== role) {
-                        return res.status(401).send('Not Allowed')
                     }
                 })
                 .catch(error => res.status(400).json({error}));
