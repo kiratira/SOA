@@ -11,7 +11,7 @@ router.get('/productId/:id',auth, authRole(ROLE.CLIENT), controller.getOne);
 router.get('/product/:name',auth, authRole(ROLE.CLIENT), controller.getOneByName);
 router.put('/product/ticket',auth,authRole(ROLE.CLIENT),controller.getTicket);
 router.delete('/delete/:name',auth, authRole(ROLE.ADMIN), controller.delete);
-router.put('/update/:id',auth, authRole(ROLE.ADMIN), controller.update);
+router.put('/update/:name',auth, authRole(ROLE.ADMIN), controller.update);
 router.post('/new',auth, authRole(ROLE.ADMIN),controller.newProduct);
 
 module.exports = router;

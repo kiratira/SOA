@@ -11,7 +11,7 @@ router.get('/points',auth, authRole(ROLE.CLIENT),controller.getAll);
 router.get('/pointId/:id',auth, authRole(ROLE.CLIENT), controller.getOne);
 router.get('/point/:name',auth, authRole(ROLE.CLIENT), controller.getOneByName);
 router.delete('/delete/:name',auth, authRole(ROLE.ADMIN), controller.delete);
-router.put('/update/:id',auth, authRole(ROLE.ARTISANT), controller.update);
+router.put('/update/:name',auth, authRole(ROLE.ARTISANT), controller.update);
 router.post('/new',auth, authRole(ROLE.ADMIN),controller.newInterestPoint);
 
 module.exports = router;

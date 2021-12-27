@@ -31,10 +31,11 @@ module.exports = {
     },
 
     update: function(req, res, next) {
-        m_product.findOneAndUpdate({_id:req.params.id}, req.body)
-        .then(() => m_product.findById({_id: req.params.id}))
+        m_product.findOneAndUpdate({name:req.params.name}, req.body)
+        .then(() => m_product.findOne({_id: m_product.id}))
             .then(product => res.status(200).json(product))
             .catch(error => res.status(400).json({error}))
+        .catch(error => res.status(400).json({error}))
     },
 
     newProduct: function (req,res,next){
