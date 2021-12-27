@@ -31,7 +31,7 @@ module.exports = {
 
     update: function(req, res, next) {
         m_InterestPoints.findOneAndUpdate({name:req.params.name}, req.body)
-        .then(() => m_InterestPoints.findById({_id: m_InterestPoints.id}))
+        .then(() => m_InterestPoints.findOne({_id: m_InterestPoints.id}))
             .then(interestPoints => res.status(200).json(interestPoints))
             .catch(error => res.status(400).json({error}))
         .catch(error => res.status(400).json({error}))
