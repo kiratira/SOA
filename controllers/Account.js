@@ -32,8 +32,8 @@ module.exports = {
     },
 
     update: function(req, res, next) {
-        m_user.findOneAndUpdate({_id:req.params.id}, req.body)
-        .then(() => m_user.findById({_id: req.params.id}))
+        m_user.findOneAndUpdate({email:req.params.email}, req.body)
+        .then(() => m_user.findOne({_id: m_user.id}))
             .then(user => res.status(200).json(user))
             .catch(error => res.status(400).json({error}))
     }

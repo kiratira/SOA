@@ -34,7 +34,6 @@ module.exports = {
         .then(() => m_InterestPoints.findOne({_id: m_InterestPoints.id}))
             .then(interestPoints => res.status(200).json(interestPoints))
             .catch(error => res.status(400).json({error}))
-        .catch(error => res.status(400).json({error}))
     },
 
     newInterestPoint: function (req,res,next){

@@ -18,19 +18,19 @@ function authRole(role){
                     switch (role) {
                         case "admin":
                             if (userRole === role) {
-								next();
+								return next();
                             }
 							return res.status(401).send('Not Allowed')
                             break;
                         case "artisant":
                             if (userRole === role || userRole === "admin") {
-                            	next();
+                            	return next();
                             }
 							return res.status(401).send('Not Allowed')
                             break;
                         case "client":
                             if (userRole === role || userRole === "admin" || userRole === "artisant") {
-                            	next();
+                                return next();
                             }
 							return res.status(401).send('Not Allowed')
                             break;
