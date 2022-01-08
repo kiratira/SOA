@@ -8,7 +8,7 @@ const UserSchema = mongoose.Schema({
     password: {type: String, required: true, unique:false},
     token: {type: String},
     tokenExpiration: {Type: Date},
-    role: {type:String,default:'client',enum: ["client","artisant","admin"]},
+    role: {type:String,default:'client',enum: ["client","artisan","admin"]},
     tickets: [{
         Expire: {type : Date}
     }]

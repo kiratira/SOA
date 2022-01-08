@@ -2,7 +2,7 @@ const m_user = require('../models/User');
 
 const ROLE = {
     ADMIN: 'admin',
-    ARTISANT: 'artisant',
+    artisan: 'artisan',
     CLIENT: 'client'
 }
 
@@ -22,14 +22,14 @@ function authRole(role){
                             }
 							return res.status(401).send('Not Allowed')
                             break;
-                        case "artisant":
+                        case "artisan":
                             if (userRole === role || userRole === "admin") {
                             	return next();
                             }
 							return res.status(401).send('Not Allowed')
                             break;
                         case "client":
-                            if (userRole === role || userRole === "admin" || userRole === "artisant") {
+                            if (userRole === role || userRole === "admin" || userRole === "artisan") {
                                 return next();
                             }
 							return res.status(401).send('Not Allowed')
