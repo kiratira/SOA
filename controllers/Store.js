@@ -46,7 +46,8 @@ module.exports = {
             .catch(onerror => res.status(400).json({onerror}));
     },
     getTicket: function (req,res, next){
-        const validDate = new Date(req.body.ValideDate);
+        const validDate = new Date();
+        validDate.setUTCDate(validDate.getUTCDate() + 2);
         const ticket = {Expire:validDate};
         m_user.updateOne( {_id: req.user.user_id},{$push: {tickets: ticket}})
             .then(() => res.status(201).json({message: 'Ticket enregistré !'}))
