@@ -32,7 +32,7 @@ function authRole(role){
                 {
                     return res.status(401).send('Not Allowed')
                 }
-                next();
+                return next();
         }
         if (req.body.role !== role)
         {
