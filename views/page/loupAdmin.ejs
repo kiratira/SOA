@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<style>
+    table,
+td {
+    border: 1px solid #333;
+}
+#erase{
+    background-color: red;
+}
+</style>
+<form action="/Loup/admin/kill" method="post">
+    <table>
+        <%
+        for (let i = 0; i < PlayerData.length; i++) {
+        %>
+        <tr>
+            <td><%=PlayerData[i].nom %></td>   
+            <td><input type="radio"name="nom"value="<%=PlayerData[i].nom %>"> </td>
+        </tr>
+        <%
+        }   
+        %>
+    </table>
+    <br/>
+    <input type="submit" value="KILL">
+</form>
+ATTENTION CA KILL !!!!!!!!!!!!!!!!!
+<br/>
+<br/>
+<a href="/Loup/admin/resetVote"><input type="button" value="Reset votes"/></a>
+<a href="/Loup/admin/resetZombie"><input type="button" value="Reset zombie"/></a>
+<a href="/Loup/admin/resultat"><input type="button" value="Resultat journée"/></a>
+<br/>
+<a href="/"><input type="button" value="Home"/></a>
+<br/>
+<br/>
+CREATION D'UTILISATEUR
+<br/>
+<form action="/Loup/admin/newPlayer" method="post">
+    <label for="nom">Nom : </label>
+    <input type="text" name="nom"/>
+    <br/>
+    <input type="submit" value="Submit"/>
+</form>
+<br/>
+<br/>
+EFFACER TOUT LE MONDE
+<br/>
+<a href="/Loup/admin/erase"><input id="erase" type="button" value="Erase"/></a>
+
+
+
+

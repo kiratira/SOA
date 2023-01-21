@@ -9,7 +9,7 @@ const ROLE = {
 function authRole(role){
     return async(req,res,next) => {
         try {
-            const token = req.body.token || req.query.token || req.headers["x-access-token"];
+            const token = req.body.token || req.query.token || req.headers["x-access-token"]|| req.cookies.access_token;
 
             await m_user.findOne({token})
                 .then(user => {

@@ -6,6 +6,7 @@ const {now} = require("mongoose");
 
 const ValidateTime = 3;
 
+
 module.exports = {
     index: function (req, res){
         res.send('Auth:index controller');
@@ -70,7 +71,7 @@ module.exports = {
             if(user && (await bcrypt.compare(password, user.password))){
                 const token = jwt.sign(
                     {user_id: user._id, email},
-                    process.env.TOKEN_KEY,
+                    "secret",
                     {
                         expiresIn: "2h",
                     }
@@ -82,8 +83,13 @@ module.exports = {
                 expiration.setHours(expiration.getHours()+ValidateTime)
                 user.tokenExpiration = expiration;
                 
+                res.cookie('access_token', token, {
+                    maxAge: 24 * 60 * 60 * 1000,
+                    httpOnly: true
+                });
+
                 return await m_user.updateOne({_id:user._id},{token: token,tokenExpiration: expiration})
-                    .then(()=>res.status(200).json(user))
+                    .then(() => res.status(201).redirect(307, '/'))
                     .catch(error => res.status(400).json({error}));
             }
             return await res.status(400).send("email ou mot de passe invalide(s)");

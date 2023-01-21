@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<style>
+    table,
+td {
+    border: 1px solid #333;
+}
+</style>
+<table>
+    <%
+    for (let i = 0; i < PlayerData.length; i++) {
+    %>
+    <tr>
+        <td><%=PlayerData[i].nom %></td>   
+        <td><%=PlayerData[i].compteur %> </td>
+    </tr>
+    <%
+    }   
+    %>
+</table>
+<br/>
+<br/>
+<a href="/Loup/admin"><input type="button" value="Home admin"/></a>

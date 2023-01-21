@@ -13,6 +13,7 @@ const r_Auth = require("../routes/Authentification");
 const r_Map = require("../routes/Map");
 const r_QR = require("../routes/QRcode");
 const r_Store = require("../routes/Store");
+const r_Loup = require("../routes/Loup");
 
 
 
@@ -27,7 +28,8 @@ module.exports = function ( app ) {
         .use('/Auth',r_Auth)
         .use('/Map',r_Map)
         .use('/QR',r_QR)
-        .use('/Store',r_Store);
+        .use('/Store',r_Store)
+        .use('/Loup',r_Loup);
 
 
     if ('development' === app.get ('env')) {
