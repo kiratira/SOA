@@ -19,6 +19,15 @@ module.exports = {
             res.render('../views/page/loupAdmin.ejs',{PlayerData:data})
         })
     },
+    zombie: function (req,res,next){
+        m_loup.find({zombie:true}, function(err, data){
+            res.render('../views/page/zombie.ejs',{PlayerData:data})
+        })
+    },
+    revive: function (req,res,next){
+        m_loup.updateOne({nom: req.body.nom},{zombie: false})
+            .then(() => res.status(201).redirect(307, '/Loup/admin'))
+    },
     resetVote: function(req,res,next){
         m_loup.updateMany({zombie:false},{compteur:0})
             .then(() => res.status(201).redirect(307, '/Loup/admin'))
@@ -32,7 +41,7 @@ module.exports = {
             .then(() => res.status(201).redirect(307, '/Loup/admin'))
     },
     resultat: function(req,res,next){
-        m_loup.find({},{_id:0,nom:1,compteur:1}).sort({compteur:-1})
+        m_loup.find({zombie:false},{_id:0,nom:1,compteur:1}).sort({compteur:-1})
             .then(data => res.render('../views/page/loupResultat.ejs',{PlayerData:data}))      
     },
     kill: function(req,res,next){
