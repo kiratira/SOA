@@ -1,5 +1,6 @@
 module.exports = {
     pierre: function (req, res){
+        console.log("QR:pierre controller")
         res.send('QR:pierre controller');
     },
     bronze: function (req, res){

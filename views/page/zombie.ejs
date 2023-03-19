@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<style>
+    table,
+td {
+    border: 1px solid #333;
+    
+}
+table{
+    position: relative;
+}
+</style>
+<form action="/Loup/admin/zombie/revive" method="post">
+    <table>
+        <%
+        for (let i = 0; i < PlayerData.length; i++) {
+        %>
+        <tr>
+            <td><%=PlayerData[i].nom %></td>   
+            <td><input type="radio"name="nom" value="<%=PlayerData[i].nom %>"> </td>
+        </tr>
+        <%
+        }   
+        %>
+    </table>
+    <br/>
+    <input type="submit" value="Ressucité">
+</form>
