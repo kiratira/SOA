@@ -40,7 +40,7 @@ module.exports = {
             const token = jwt.sign({
                 user_id:user._id,email},
                 process.env.TOKEN_KEY,{
-                    expiresIn:"2h",
+                    expiresIn:"4h",
                 }
             );
 
@@ -73,7 +73,7 @@ module.exports = {
                     {user_id: user._id, email},
                     "secret",
                     {
-                        expiresIn: "2h",
+                        expiresIn: "4h",
                     }
                 );
                 
@@ -84,7 +84,7 @@ module.exports = {
                 user.tokenExpiration = expiration;
                 
                 res.cookie('access_token', token, {
-                    maxAge: 24 * 60 * 60 * 1000,
+                    maxAge: 12 * 30 * 24 * 60 * 60 * 100,
                     httpOnly: true
                 });
 

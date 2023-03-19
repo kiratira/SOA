@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<style>
+    table,
+td {
+    border: 1px solid #333;
+    
+}
+table{
+    position: relative;
+}
+</style>
+<form action="/ListingJeunes/update" method="post">
+    <table>
+        <%
+        for (let i = 0; i < Jeunes.length; i++) {
+        %>
+        <tr>
+            <td><input type="radio"name="nom" value="<%=Jeunes[i].nom %>"> </td>
+            <td><%=Jeunes[i].nom %></td>   
+            <td><%if((Jeunes[i].heure.getTime() +(20*60*1000)) > new Date().getTime()) { %>
+                <p>OK</p>
+            <%} else{%>
+                <p> Vas le chercher </p>
+            <%}%>  
+            </td>
+        </tr>
+        <%
+        }   
+        %>
+    </table>
+    <br/>
+    <input type="submit" value="Je l'ai vu">
+</form>
+
+<br/>
+<form action="/ListingJeunes/new" method="post">
+    <label for="nom">Nom : </label>
+    <input type="text" name="nom"/>
+    <br/>
+    <input type="submit" value="Submit"/>
+</form>
+<br/>
+<br/>
